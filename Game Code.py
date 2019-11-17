@@ -3,6 +3,14 @@ board = ["-", "-", "-",
          "-", "-", "-",
          "-", "-", "-"]
 
+# if game is still going
+game_still_going = True
+
+# Who is the winner
+winner = None
+
+# whos turn is it?
+current_player = "X"
 
 # Display Board
 
@@ -16,6 +24,19 @@ def display_board():
 def play_game():
     # Show the initial game board
     display_board()
+# Loop until the game stops (winner or tie)
+    while game_still_going:
+        # Handle a turn
+        handle_turn(current_player)
 
+def handle_turn(player):
+
+    position = input("Choose a position from 1-9: ")
+    # Get correct index in our board list
+    position = int(position) - 1
+
+    board[position] = "X"
+    display_board()
 
 play_game()
+
