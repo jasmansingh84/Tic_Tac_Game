@@ -12,6 +12,7 @@ winner = None
 # whos turn is it?
 current_player = "X"
 
+
 # Display Board
 
 def display_board():
@@ -24,7 +25,8 @@ def display_board():
 def play_game():
     # Show the initial game board
     display_board()
-# Loop until the game stops (winner or tie)
+
+    # Loop until the game stops (winner or tie)
     while game_still_going:
         # Handle a turn
         handle_turn(current_player)
@@ -32,7 +34,10 @@ def play_game():
         # Check if the game is over
         check_if_game_over()
 
-        # Since the game is over, print the winner or tie
+        # Flip to the other player
+        flip_player()
+
+    # Since the game is over, print the winner or tie
     if winner == "X" or winner == "O":
         print(winner + " won.")
 
@@ -40,14 +45,33 @@ def play_game():
         print("Tie.")
 
 
+# Handle a single turn to an arbitrary player
 def handle_turn(player):
-
+    # Get position from player
+    print(player + "'s turn.")
     position = input("Choose a position from 1-9: ")
-    # Get correct index in our board list
-    position = int(position) - 1
 
-    board[position] = "X"
+    # Whatever the user inputs, make sure it is a valid input, and the spot is open
+    valid = False
+    while not valid:
+
+        # Make sure the input is valid
+        while position not in ["1", "2", "3", "4", "5", "6", "7", "8", "9"]:
+            position = input("Choose a position from 1-9: ")
+
+        # Get correct index in our board list
+        position = int(position) - 1
+
+        # Then also make sure the spot is available on the board
+        if board[position] == "-":
+            valid = True
+        else:
+            print("You can't go there. Go again.")
+
+    # Put the game piece on the board
+    board[position] = player
     display_board()
+
 
 def check_if_game_over():
     check_for_winner()
@@ -152,10 +176,31 @@ def check_for_tie():
         return False
 
 
+# Flip the current player from X to O, or O to X
+def flip_player():
+    # Global variables we need
+    global current_player
+    # If the current player was X, make it O
+    if current_player == "X":
+        current_player = "O"
+    # Or if the current player was O, make it X
+    elif current_player == "O":
+        current_player = "X"
 
 
-
-
-
+# ------------ Start Execution -------------
+# Play a game of tic tac toe
 play_game()
+
+# Board
+# DISPLAY board
+# play game
+# handle turn
+# check wins
+# check loss
+# check Draw
+# check column
+# check rows
+# check diagnols
+
 
