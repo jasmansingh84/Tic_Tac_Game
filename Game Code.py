@@ -32,6 +32,13 @@ def play_game():
         # Check if the game is over
         check_if_game_over()
 
+        # Since the game is over, print the winner or tie
+    if winner == "X" or winner == "O":
+        print(winner + " won.")
+
+    elif winner == None:
+        print("Tie.")
+
 
 def handle_turn(player):
 
