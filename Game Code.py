@@ -44,6 +44,7 @@ def handle_turn(player):
 
 def check_if_game_over():
     check_for_winner()
+    check_for_tie()
 
 
 # Check to see if somebody has won
